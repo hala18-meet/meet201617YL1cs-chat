@@ -1,12 +1,15 @@
-'''hala'''#2016-2017 PERSONAL PROJECTS: TurtleChat!
+#2016-2017 PERSONAL PROJECTS: TurtleChat!
 #WRITE YOUR NAME HERE!
+#hala.k
 
 #####################################################################################
 #                                   IMPORTS                                         #
 #####################################################################################
 #import the turtle module
+import turtle 
 #import the Client class from the turtle_chat_client module
-#Finally, from the turtle_chat_widgets module, import two classes: Button and TextInput
+
+from turtle_chat_widgets import Button,TextInput
 #####################################################################################
 #####################################################################################
 
@@ -16,7 +19,7 @@
 #Make a class called TextBox, which will be a subclass of TextInput.
 #Because TextInput is an abstract class, you must implement its abstract
 #methods.  There are two:
-#
+
 #draw_box
 #write_msg
 #
@@ -35,6 +38,21 @@
 #
 #3. If you want to make a newline character (i.e. go to the next line), just add
 #   \r to your string.  Test it out at the Python shell for practice
+class Textbox(TextInput):
+    def draw_box(self):
+        turtle.pendown()
+        turtle.goto(self.pos)
+        turtle.goto(0,self.height)
+        turtle.goto(self.width,self.height)
+        turtle.goto(self.width,0)
+        turtle.goto(self.pos)
+        turtle.penup()
+    def write_msg(self):
+        pass
+        
+        
+        
+    
 #####################################################################################
 #####################################################################################
 
@@ -66,6 +84,7 @@
 #Read the comments below for hints and directions.
 ##################################################################
 ##################################################################
+
 class View:
     _MSG_LOG_LENGTH=5 #Number of messages to retain in view
     _SCREEN_WIDTH=300
