@@ -8,6 +8,7 @@
 #import the turtle module
 import turtle 
 #import the Client class from the turtle_chat_client module
+from turtle_chat_client import Client
 
 from turtle_chat_widgets import Button,TextInput
 #####################################################################################
@@ -48,8 +49,16 @@ class Textbox(TextInput):
         turtle.goto(self.pos)
         turtle.penup()
     def write_msg(self):
-        pass
+        self.writer.goto(0,self.height-10)
+        self.writer.write(self.new_msg)
+        #if(self.new_msg.length>40):
+            
+           # self.writer.goto(0,self.height-20)
+            
+            
         
+        
+
         
         
     
@@ -73,6 +82,11 @@ class Textbox(TextInput):
 #      you send messages and update message displays.
 #####################################################################################
 #####################################################################################
+class sendButton(Button):
+    def fun():
+        self.shape=('square')
+        self.shapesize(2,10)
+        
 
 
 ##################################################################
@@ -99,12 +113,13 @@ class View:
         ###
         #Store the username and partner_name into the instance.
         ###
-
+        self.username=username
+        self.partner_name=partner_name
         ###
         #Make a new client object and store it in this instance of View
         #(i.e. self).  The name of the instance should be my_client
         ###
-
+        
         ###
         #Set screen dimensions using turtle.setup
         #You can get help on this function, as with other turtle functions,
