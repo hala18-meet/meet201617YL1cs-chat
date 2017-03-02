@@ -7,7 +7,8 @@
 #                                   IMPORTS                                         #
 #####################################################################################
 #import the turtle module
-import turtle 
+import turtle
+import time 
 #import the Client class from the turtle_chat_client module
 from turtle_chat_client import Client
 
@@ -41,7 +42,10 @@ from turtle_chat_widgets import Button,TextInput
 #3. If you want to make a newline character (i.e. go to the next line), just add
 #   \r to your string.  Test it out at the Python shell for practice
 class Textbox(TextInput):
+    
+    turtle.bgpic("picc.png")
     def draw_box(self):
+        #self.draw.begin_fill()
         self.pos=(0,-190)
         self.draw = turtle.clone()
         self.draw.penup()
@@ -52,7 +56,17 @@ class Textbox(TextInput):
         self.draw.goto(self.width/2,self.height-190)
         self.draw.goto(self.width/2,-190)
         self.draw.goto(self.pos)
+        #self.draw.end_fill()
         self.draw.penup()
+
+        self.draw.goto(-11,220)
+        self.draw.write('welcome',False,'center',font=('Candara',22,'bold'))
+        time.sleep(2)
+        self.draw.clear()
+        self.draw.write('to my chat',False,'center',font=('Candara',22,'bold'))
+        self.draw.goto(0,190)
+        self.draw.circle(50,360)
+        self.draw.pendown()
     def write_msg(self):
         
         self.writer.clear()
@@ -90,10 +104,11 @@ class Textbox(TextInput):
 #####################################################################################
 #####################################################################################
 class SendButton(Button):
+    turtle.register_shape("pic.gif")
 
     
-    def __init__(self,view=None ,my_turtle=None,shape=None,pos=(0,-230)):
-        
+    def __init__(self,view=None ,my_turtle=None,shape=("pic.gif"),pos=(0,-230)):
+    
 
         super(SendButton,self).__init__(my_turtle,shape,pos)
         self.view=view
@@ -166,8 +181,10 @@ class View:
         #
         #at the Python shell.
         ###
-        
+       
         turtle.setup(self._SCREEN_WIDTH, self._SCREEN_HEIGHT)
+        
+        
         
        
     
@@ -183,16 +200,20 @@ class View:
         #self.msg_queue.insert(0,new_msg)
         ###
         self.msg_queue=[]
-
-        
+######        for i in range(5):
+######            self.msg_queue.insert(0,"")
+######        
 
         ###
         #Create one turtle object for each message to display.
         #You can use the clear() and write() methods to erase
         #and write messages for each
         
+        self.turtle_queue=[]
+        for i in range(5):
+            turtle.goto(-20,View._LINE_SPACING*i)
+            self.turtle_queue.append(turtle.clone())
         
-            
         ###
 
         ###
@@ -229,6 +250,7 @@ class View:
         #self.msg_queue()
         self.msg_queue.insert(0,self.textbox.new_msg)
         self.display_msg()
+        
         
 
     def get_msg(self):
@@ -280,19 +302,37 @@ class View:
         turtle.writer.write(msg_queue[0])
         self.write_msg()
         '''
-        #writer= turtle.clone()
-        #self.writer= writer
-        #self.writer.clear()
+        '''
+        turtles_list=list()
+        self.turtles_list=turtles_list
+        self.turtles_list=[]
         for i in range(5):
+            self.turtles_list.insert()
+            self.turtles_list[i]=turtle.clone()
+            '''
             
-            self.writer.goto(0,50*i)
-            self.writer.write(self.msg_queue[i])
+            
+####            
+####        writer= turtle.clone()
+####        self.writer= writer
+####        self.writer.hideturtle()
+####        self.writer.clear()
+        
+        for i in range(min(5,len(self.msg_queue))):
+            print(i)
+            
+            self.turtle_queue[i].clear()
+            self.turtle_queue[i].write(self.msg_queue[i])
+                        
+           
         
         
             
 
     def get_client(self):
         return self.my_client
+
+    
 ##############################################################
 ##############################################################
 
@@ -317,3 +357,4 @@ if __name__ == '__main__':
         turtle.ontimer(check,_WAIT_TIME) #Check recursively
     check()
     turtle.mainloop()
+
