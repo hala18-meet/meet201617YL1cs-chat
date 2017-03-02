@@ -8,6 +8,8 @@ class Button(metaclass=ABCMeta):
     The abstract method, fun, is called when the button is clicked on.
     '''
     def __init__(self,my_turtle=None,shape=None,pos=(0,0)):
+
+        
         '''
         Initialize Button object.  The button will be given an onclick
         listener that triggers the implementation of the abstract method, fun.
